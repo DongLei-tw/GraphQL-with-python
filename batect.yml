@@ -15,7 +15,7 @@ containers:
       PYTHONPATH: "/src"
       PYTHONUSERBASE: "/src/.pip-cache"
       PIPENV_VENV_IN_PROJECT: true
-      FLASK_APP: flask_app.py  # flask entry point file
+      # FLASK_APP: flask_app.py  # flask entry point file
       FLASK_ENV: development   # flask running mode
     run_as_current_user:
       enabled: true
@@ -42,7 +42,7 @@ tasks:
       command: /bin/sh
 
   uvicorn_app:
-    description: Start a simple GraphQL API built by ariadne + uvicorn
+    description: Start a simple GraphQL API built by Ariadne and served by Uvicorn
     group: App
     prerequisites:
       - dep
@@ -51,10 +51,19 @@ tasks:
       command: python -m pipenv run uvicorn uvicorn_app:app --host 0.0.0.0 --port 5000
 
   flask_app:
-    description: Start a simple GraphQL API built by ariadne + flask
+    description: Start a simple GraphQL API built by Ariadne and served by Flask
     group: App
     prerequisites:
       - dep
     run:
       container: build-env
-      command: python -m pipenv run flask run --host 0.0.0.0 --port 5000
+      command: sh -c 'export FLASK_APP=flask_app; python -m pipenv run flask run --host 0.0.0.0 --port 5000'
+
+  flask_app_mutations:
+    description: Start a simple GraphQL API built by Ariadne and served by Flask & Adding mutations supported
+    group: App
+    prerequisites:
+      - dep
+    run:
+      container: build-env
+      command: sh -c 'export FLASK_APP=flask_app_mutations; python -m pipenv run flask run --host 0.0.0.0 --port 5000'
