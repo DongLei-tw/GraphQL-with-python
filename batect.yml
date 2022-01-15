@@ -18,6 +18,9 @@ containers:
     run_as_current_user:
       enabled: true
       home_directory: /home/container-user
+    ports:
+      - local: 5000
+        container: 5000
 
 tasks:
   dep:
@@ -35,3 +38,12 @@ tasks:
     run:
       container: build-env
       command: /bin/sh
+
+  uvicorn_app:
+    description: Start a simple GraphQL API built by ariadne + uvicorn
+    group: App
+    prerequisites:
+      - dep
+    run:
+      container:  build-env
+      command: python -m pipenv run uvicorn uvicorn_app:app --host 0.0.0.0 --port 5000
