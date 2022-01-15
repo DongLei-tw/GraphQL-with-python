@@ -23,3 +23,4 @@
 - [Video] [3 Things I wish I knew when starting with GraphQL](https://youtu.be/0yr25jzVLMg)
 - [Video] [Why I Don’t Use GraphQL Anymore](https://youtu.be/S1wQ0WvJK64)
 - [macOS Monterey - Port 5000 already in use!](https://nono.ma/port-5000-used-by-control-center-in-macos)
+- [Play with GraphiQL - Star War Graphql API](https://graphql.github.io/swapi-graphql/)

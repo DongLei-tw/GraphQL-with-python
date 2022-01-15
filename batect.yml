@@ -15,6 +15,8 @@ containers:
       PYTHONPATH: "/src"
       PYTHONUSERBASE: "/src/.pip-cache"
       PIPENV_VENV_IN_PROJECT: true
+      FLASK_APP: flask_app.py  # flask entry point file
+      FLASK_ENV: development   # flask running mode
     run_as_current_user:
       enabled: true
       home_directory: /home/container-user
@@ -47,3 +49,12 @@ tasks:
     run:
       container:  build-env
       command: python -m pipenv run uvicorn uvicorn_app:app --host 0.0.0.0 --port 5000
+
+  flask_app:
+    description: Start a simple GraphQL API built by ariadne + flask
+    group: App
+    prerequisites:
+      - dep
+    run:
+      container: build-env
+      command: python -m pipenv run flask run --host 0.0.0.0 --port 5000
