@@ -3,7 +3,7 @@
 ## What is GraphQL
 
 
-### Why it come 
+### Why it come
 
 
 ## How to use GraphQL

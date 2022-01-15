@@ -2,7 +2,7 @@ from ariadne.constants import PLAYGROUND_HTML
 from flask import Flask, request, jsonify
 from ariadne import gql, QueryType, MutationType, make_executable_schema, graphql_sync
 
-# Define type definitions (schema) using SDL
+# Define type definitions (schema) using SDL(Schema Definition Language)
 type_defs = gql(
     """
    type Query {
