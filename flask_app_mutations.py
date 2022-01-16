@@ -6,9 +6,8 @@ from ariadne import gql, QueryType, MutationType, make_executable_schema, graphq
 type_defs = gql(
     """
    type Query {
-       places: [Place]
+       places(name: String, length: Int): [Place]
    }
-
 
    type Place {
        name: String!
@@ -16,7 +15,8 @@ type_defs = gql(
        country: String!
        }  
 
-   type Mutation{add_place(name: String!, description: String!, country: String!): Place}
+   type Mutation{
+        add_place(name: String!, description: String!, country: String!): Place}
    """
 )
 
@@ -32,7 +32,13 @@ mutation = MutationType()
 
 # places resolver (return places)
 @query.field("places")
-def places(*_):
+def places(_, info, name=None, length=None):
+    if name:
+        filtered = [p for p in places if p['name'] == name]
+        return filtered
+    if length:
+        filtered = [p for p in places if len(p['name']) >= length]
+        return filtered
     return places
 
 
