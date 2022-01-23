@@ -5,19 +5,20 @@ from ariadne import gql, QueryType, MutationType, make_executable_schema, graphq
 # Define type definitions (schema) using SDL(Schema Definition Language)
 type_defs = gql(
     """
-   type Query {
-       places(name: String, length: Int): [Place]
-   }
+    type Query {
+        places(name: String, length: Int): [Place]
+    }
 
-   type Place {
-       name: String!
-       description: String!
-       country: String!
-       }  
-
-   type Mutation{
-        add_place(name: String!, description: String!, country: String!): Place}
-   """
+    type Place {
+        name: String!
+        description: String!
+        country: String!
+    }
+    
+    type Mutation {
+        add_place(name: String!, description: String!, country: String!): Place
+    }
+    """
 )
 
 # Initialize query
