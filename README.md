@@ -18,20 +18,36 @@ $ ./batect shell
 $ ./batect --list-tasks
 ```
 
+## Demo
 
+Let’s create a simple GraphQL API with Ariadne that returns a list of destinations to visit. 
 
-## GraphQL terms
+Create 3 separated applications to track  the implementation steps.
 
-**Query**
-A prebuilt type for querying our data, more like a GET request in a REST API.
+### 1. Uvicorn serves a simple GraphQL API
 
-**Mutation**
-A prebuilt type for manipulating our data. Every field in the Mutation type can be thought of as a POST/PUT/DELETE/PATCH request in a REST API.
+[Uvicorn](https://www.uvicorn.org/), an ASGI server, serves a GraphQL API
 
-**Resolver**
-A function that connects schema fields and types to various backends.
+```sh
+$ ./batect uvicorn_app
+```
 
-**Field**
-A unit of data that belongs to a type in your schema.
+### 2. Integrating Ariadne with Flask
 
-You can learn more about all the terms from the [official GraphQL documentation](https://graphql.org/).
+Implement the same functionality using Flask. We need to add two routes that will be handling two functionalities, which were previously being handled by the inbuilt ASGI web server. 
+
+This includes:
+- a route to get the client request to pass it to executable schema and then return back a response to the client
+- a route to serve as a Playground client to easily interact with a client (you might not need this one in production)
+
+```sh
+$ ./batect flask_app
+```
+
+### 3. Adding mutations support
+
+Add some mutations to Step 2 implementations to allow us to modify server data set. 
+
+```sh
+$ ./batect flask_app_mutations
+```
